@@ -1,13 +1,16 @@
 $(function () {
     var buttons = $(".section button");
     var status = $("#status");
+    var potion = $(".potion");
 
     var functions = {
         reset: function resetGame() {
             setLife('--');
+            setPotion('--');
         },
         start: function startGame() {
             setLife('3');
+            setPotion('1');
         },
         hit: function loseOneLife() {
             var nb_lifes = getLife();
@@ -27,6 +30,18 @@ $(function () {
         gotoSection($(this).attr("go"));
     });
 
+    potion.click(function () {
+        var potion = getPotion();
+        if (!isNaN(potion)) {
+            if (potion > 0) {
+                setLife(getLife() + 1);
+                setPotion(potion - 1);
+            } else {
+                alert('Vous n\'avez plus de potion !');
+            }
+        }
+    });
+
     gotoSection('intro');
 
     function gotoSection(key) {
@@ -42,6 +57,11 @@ $(function () {
         }
     }
 
+    function endGame() {
+        $('.section').hide();
+        gotoSection('death');
+    }
+
     function getLife() {
         return parseInt($(".life .value").text());
     }
@@ -50,9 +70,12 @@ $(function () {
         $(".life .value").text(v);
     }
 
-    function endGame() {
-        $('.section').hide();
-        gotoSection('death');
+    function getPotion() {
+        return parseInt($(".potion .value").text());
+    }
+
+    function setPotion(v) {
+        $(".potion .value").text(v);
     }
 
 });
