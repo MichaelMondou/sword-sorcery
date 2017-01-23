@@ -13,13 +13,12 @@
     <div class="life">
         Nb de vies : <span class="value">--</span>
     </div>
+    <div class="pv">
+        PV : <span class="value">--</span>
+    </div>
     <div class="potion">
         Potion : <span class="value">--</span>
     </div>
-</div>
-
-<div class="section" id="combat">
-
 </div>
 
 <div class="section" id="intro">
@@ -42,7 +41,7 @@
 
     <action name="start"/>
 
-    <button go="continueTheWay">Très bien</button>
+    <button go="good">Très bien</button>
     <button go="not-good">Je ne suis pas d'accord</button>
 </div>
 
@@ -74,7 +73,7 @@
 </div>
 
 <div class="section" id="contestUncle">
-    Tu iras t'amuser avec tes copains pilotes quand ton travail sera temriné. File !
+    Tu iras t'amuser avec tes copains pilotes quand ton travail sera terminé. File !
     Vous prenez une baffe. Ca vous apprendra à répondre à votre oncle. Mal élevé !
 
     <action name="hit"/>
@@ -419,6 +418,7 @@
 
 <div class="section" id="death">
     Vous êtes mort ! La galaxie est dans la merde.
+
     <button go="intro">Recommencer</button>
 </div>
 
