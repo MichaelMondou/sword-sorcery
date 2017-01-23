@@ -3,7 +3,49 @@ $(function () {
     var status = $("#status");
     var potion = $(".potion");
 
+    /*var combatDiv = $('#combat');
+
+    function Stormtrooper () {
+        this.pv = 100;
+        this.damage = 10;
+    }
+
+    function Player () {
+        this.pv = 100;
+        this.damage = 50;
+    }
+
+    function Inventory () {
+        this.items = {
+            'potion': 1
+        };
+    }*/
+
     var functions = {
+        init: function initGame() {
+            $(".section").hide();
+
+            /*var player = new Player();
+            var inventory = new Inventory();*/
+
+            buttons.click(function () {
+                $(this).parents("div:first").hide();
+                gotoSection($(this).attr("go"));
+            });
+
+            potion.click(function () {
+                if (!isNaN(potion)) {
+                    if (potion > 0) {
+                        setLife(getLife() + 1);
+                        setPotion(potion - 1);
+                    } else {
+                        alert('Vous n\'avez plus de potion !');
+                    }
+                }
+            });
+
+            gotoSection('intro');
+        },
         reset: function resetGame() {
             setLife('--');
             setPotion('--');
@@ -20,29 +62,21 @@ $(function () {
             }
 
             setLife(nb_lifes - 1);
-        }
+        },
+        /*combat: function makeACombat() {
+            combatDiv.append(
+                '<ul>' +
+                '<li>Clone : 100 pv</li>' +
+                '<li>Clone : 100 pv</li>' +
+                '<li>Clone : 100 pv</li>' +
+                '<li>Clone : 100 pv</li>' +
+                '</ul>'
+            );
+            combatDiv.show();
+        }*/
     };
 
-    $(".section").hide();
-
-    buttons.click(function () {
-        $(this).parents("div:first").hide();
-        gotoSection($(this).attr("go"));
-    });
-
-    potion.click(function () {
-        var potion = getPotion();
-        if (!isNaN(potion)) {
-            if (potion > 0) {
-                setLife(getLife() + 1);
-                setPotion(potion - 1);
-            } else {
-                alert('Vous n\'avez plus de potion !');
-            }
-        }
-    });
-
-    gotoSection('intro');
+    functions['init']();
 
     function gotoSection(key) {
         var section = $("#" + key);
