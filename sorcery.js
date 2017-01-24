@@ -2,6 +2,15 @@ $(function () {
     function Stormtrooper() {
         this.pv = 100;
         this.damage = 10;
+        this.getPV = function () {
+            return player.pv;
+        };
+        this.setPV = function (v) {
+            player.pv = v;
+        };
+        this.getDamage = function() {
+            return player.damage;
+        };
     }
 
     function Player() {
@@ -21,6 +30,9 @@ $(function () {
         this.setPV = function(v) {
             player.pv = v;
         };
+        this.getDamage = function() {
+            return player.damage;
+        };
     }
 
     function Inventory() {
@@ -34,6 +46,12 @@ $(function () {
         };
         this.setNbPotion = function setNbPotion(v) {
             this.potion.nb = v;
+        };
+        this.increaseNbPotion = function increaseNbPotion() {
+            this.potion.nb++;
+        };
+        this.decreaseNbPotion = function decreaseNbPotion() {
+            this.potion.nb--;
         };
     }
 
@@ -50,20 +68,28 @@ $(function () {
         goToSection($(this).attr("go"));
     });
 
-    /*potionDiv.click(function () {
-        var potion = player.getPotion();
-        if (potion > 0) {
+    potionDiv.click(function () {
+        var potion = inventory.getPotion();
+        if (potion.nb > 0) {
             player.setPV(player.getPV() + potion.value);
-            player.setPotion(potion - 1);
+            inventory.decreaseNbPotion();
+            alert('Vous avez utilisé une potion !');
         } else {
             alert('Vous n\'avez plus de potion !');
         }
-    });*/
+        refresh();
+    });
 
     var refresh = function() {
         lifeDiv.find("span.value").html(player.getLife());
         pvDiv.find("span.value").html(player.getPV());
-        potionDiv.find("span.value").html(inventory.getPotion().nb);
+
+        if (inventory.getPotion().nb > 0) {
+            potionDiv.find("span.value").html(inventory.getPotion().nb);
+            potionDiv.show();
+        } else {
+            potionDiv.hide();
+        }
     };
 
     var functions = {
@@ -88,6 +114,10 @@ $(function () {
                 endGame();
             }
             player.setLife(nb_lifes - 1);
+            refresh();
+        },
+        potionWin: function potionWin() {
+            inventory.increaseNbPotion();
             refresh();
         }
     };
