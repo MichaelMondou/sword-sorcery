@@ -41,10 +41,9 @@
 
     <action name="start"/>
 
-    <button go="good">Très bien</button>
+    <button go="fight1">Très bien</button>
     <button go="not-good">Je ne suis pas d'accord</button>
 </div>
-
 
 <div class="section" id="not-good">
     Ok bah du coup la partie est terminée. Fallait pas chercher dès le début aussi...
@@ -262,16 +261,19 @@
 <div class="section" id="fight1">
     Votre adversaire vous cogne. Vous perdez un point de vie.
 
-    <action name="hit"/>
+    <action name="fight"/>
 
-    <button go="hitMan">Le cogner à votre tour</button>
+    <img src='https://tse1.mm.bing.net/th?id=OIP.WYJpJZhES5GaQGu7-u5eAAC8Es&pid=Api'>
+    <p class="enemy-life"></p>
+
+    <button go="fight1">Le cogner à votre tour</button>
     <button go="hideBehindBen2">Se cacher sous la jupe d'Obi-Wan</button>
 </div>
 
 <div class="section" id="hitMan">
     Votre adversaire n'en a pas fini et vous recogne. Vous perdez un point de vie.
 
-    <action name="hit"/>
+    <action name="fight"/>
 
     <button go="hitMan">Le recogner à votre tour</button>
     <button go="hideBehindBen2">Se cacher sous la jupe d'Obi-Wan</button>

@@ -1,15 +1,15 @@
 $(function () {
     function Stormtrooper() {
-        this.pv = 100;
+        this.pv = 200;
         this.damage = 10;
         this.getPV = function () {
-            return player.pv;
+            return this.pv;
         };
         this.setPV = function (v) {
-            player.pv = v;
+            this.pv = v;
         };
         this.getDamage = function() {
-            return player.damage;
+            return this.damage;
         };
     }
 
@@ -57,6 +57,7 @@ $(function () {
 
     var player = new Player();
     var inventory = new Inventory();
+    var stormtrooper = new Stormtrooper();
 
     var buttons = $(".section button");
     var lifeDiv = $(".life");
@@ -83,6 +84,7 @@ $(function () {
     var refresh = function() {
         lifeDiv.find("span.value").html(player.getLife());
         pvDiv.find("span.value").html(player.getPV());
+        $(".enemy-life").html(stormtrooper.getPV());
 
         if (inventory.getPotion().nb > 0) {
             potionDiv.find("span.value").html(inventory.getPotion().nb);
@@ -119,6 +121,14 @@ $(function () {
         potionWin: function potionWin() {
             inventory.increaseNbPotion();
             refresh();
+        },
+        fight : function () {
+            if(stormtrooper.getPV() - player.getDamage() <= 0) {
+                endFightBar();
+            } else {
+                stormtrooper.setPV(stormtrooper.getPV() - player.getDamage());
+                refresh();
+            }
         }
     };
 
@@ -140,6 +150,11 @@ $(function () {
     function endGame() {
         $('.section').hide();
         goToSection('death');
+    }
+
+    function endFightBar(){
+        $('.section').hide();
+        goToSection('makeATour');
     }
 
 });
