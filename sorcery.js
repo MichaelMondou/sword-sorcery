@@ -1,7 +1,21 @@
 $(function () {
-    function Stormtrooper() {
-        this.pv = 200;
+    function Enemy() {
+        this.pv = 250;
         this.damage = 10;
+        this.getPV = function () {
+            return this.pv;
+        };
+        this.setPV = function (v) {
+            this.pv = v;
+        };
+        this.getDamage = function() {
+            return this.damage;
+        };
+    }
+
+    function HommeDesSables() {
+        this.pv = 500;
+        this.damage = 40;
         this.getPV = function () {
             return this.pv;
         };
@@ -33,6 +47,10 @@ $(function () {
         this.getDamage = function() {
             return player.damage;
         };
+
+        this.resetPv = function () {
+            this.pv = 100;
+        }
     }
 
     function Inventory() {
@@ -57,7 +75,8 @@ $(function () {
 
     var player = new Player();
     var inventory = new Inventory();
-    var stormtrooper = new Stormtrooper();
+    var evazan = new Enemy();
+    var hommeDesSables = [new HommeDesSables(), new HommeDesSables(), new HommeDesSables()];
 
     var buttons = $(".section button");
     var lifeDiv = $(".life");
@@ -84,7 +103,7 @@ $(function () {
     var refresh = function() {
         lifeDiv.find("span.value").html(player.getLife());
         pvDiv.find("span.value").html(player.getPV());
-        $(".enemy-life").html(stormtrooper.getPV());
+        $(".enemy-life").html(evazan.getPV() + " PDV");
 
         if (inventory.getPotion().nb > 0) {
             potionDiv.find("span.value").html(inventory.getPotion().nb);
@@ -123,10 +142,25 @@ $(function () {
             refresh();
         },
         fight : function () {
-            if(stormtrooper.getPV() - player.getDamage() <= 0) {
+            //perte des pdv du evazan
+            if(evazan.getPV() - player.getDamage() <= 0) {
                 endFightBar();
             } else {
-                stormtrooper.setPV(stormtrooper.getPV() - player.getDamage());
+                evazan.setPV(evazan.getPV() - player.getDamage());
+                refresh();
+            }
+
+            //perte des pdv du joueurs
+            if(player.getPV() - evazan.getDamage() <= 0) {
+                if(player.getLife() - 1 == 0) {
+                    endGame();
+                } else {
+                    player.resetPv();
+                    player.setLife(player.getLife() - 1);
+                    refresh();
+                }
+            } else {
+                player.setPV(player.getPV() - evazan.getDamage());
                 refresh();
             }
         }
