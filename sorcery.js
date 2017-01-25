@@ -13,8 +13,9 @@ $(function () {
         };
     }
 
-    function HommeDesSables() {
+    function HommeDesSables(elemClasse) {
         this.pv = 500;
+        this.class = elemClasse;
         this.damage = 40;
         this.getPV = function () {
             return this.pv;
@@ -24,6 +25,9 @@ $(function () {
         };
         this.getDamage = function() {
             return this.damage;
+        };
+        this.getClass = function () {
+          return this.class;
         };
     }
 
@@ -76,7 +80,7 @@ $(function () {
     var player = new Player();
     var inventory = new Inventory();
     var evazan = new Enemy();
-    var hommeDesSables = [new HommeDesSables(), new HommeDesSables(), new HommeDesSables()];
+    var hommeDesSables = [new HommeDesSables('life-sm-1'), new HommeDesSables('life-sm-2'), new HommeDesSables('life-sm-3')];
 
     var buttons = $(".section button");
     var lifeDiv = $(".life");
@@ -104,6 +108,11 @@ $(function () {
         lifeDiv.find("span.value").html(player.getLife());
         pvDiv.find("span.value").html(player.getPV());
         $(".enemy-life").html(evazan.getPV() + " PDV");
+        for(var i = 0; i < hommeDesSables.length; i++ ) {
+          var classe = "." + hommeDesSables[i].getClass();
+          console.log($(classe));
+          $(classe).html(hommeDesSables[i].getPV() + " PDV");
+        }
 
         if (inventory.getPotion().nb > 0) {
             potionDiv.find("span.value").html(inventory.getPotion().nb);
@@ -163,6 +172,35 @@ $(function () {
                 player.setPV(player.getPV() - evazan.getDamage());
                 refresh();
             }
+        },
+        hitSandMan: function () {
+          //number between 0 and 2
+          var rand = Math.floor(Math.random()*(2-0+1));
+
+          var target = hommeDesSables[rand];
+          //degats sur les enemis
+          if(target.getPV() - target.getDamage() <= 0) {
+              endFightSandMans();
+          } else {
+              target.setPV(target.getPV() - target.getDamage());
+              refresh();
+          }
+
+          //perte des pdv du joueurs
+          if(player.getPV() - target.getDamage() <= 0) {
+              if(player.getLife() - 1 == 0) {
+                  endGame();
+              } else {
+                  player.resetPv();
+                  player.setLife(player.getLife() - 1);
+                  refresh();
+                  $('.section').hide();
+                  goToSection('takeALook');
+              }
+          } else {
+              player.setPV(player.getPV() - target.getDamage());
+              refresh();
+          }
         }
     };
 
@@ -189,6 +227,10 @@ $(function () {
     function endFightBar(){
         $('.section').hide();
         goToSection('makeATour');
+    }
+
+    function endFightSandMans () {
+
     }
 
 });

@@ -69,8 +69,15 @@ img {
 	margin-right: auto;
 }
 
-.enemy-life {
+.enemy-life, .life-sm-1, .life-sm-2, .life-sm-3 {
 	text-align: center;
 }
 
+.img-sm-1 {
+	float: left;
+	width: 33%;
+}
 
+.img-sm-2 {
+	float: right;
+}
