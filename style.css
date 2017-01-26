@@ -72,3 +72,12 @@ img {
 .enemy-life, .life-sm-1, .life-sm-2, .life-sm-3 {
 	text-align: center;
 }
+
+.life-sm-1, .life-sm-2, .life-sm-3 {
+	float: left;
+	margin-left: 100px;
+}
+
+.img-sm-1,.img-sm-2,.img-sm-3 {
+	float: left;
+}
