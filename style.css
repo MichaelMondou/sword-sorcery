@@ -81,3 +81,8 @@ img {
 .img-sm-1,.img-sm-2,.img-sm-3 {
 	float: left;
 }
+
+.img-st-1,.img-st-2,.img-st-3,.img-st-4, img-st-5 {
+    width: 200px;
+    height: 200px;
+}

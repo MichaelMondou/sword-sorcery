@@ -31,6 +31,32 @@ $(function () {
         };
     }
 
+    function Stormtrooper(imgclasse, scoreclasse) {
+        this.pv = 100;
+        this.imgclass = imgclasse;
+        this.scoreclass = scoreclasse;
+        this.damage = 5;
+
+        this.getPV = function () {
+            return this.pv;
+        };
+        this.setPV = function (v) {
+            this.pv = v;
+        };
+        this.getDamage = function() {
+            return this.damage;
+        };
+        this.getClass = function () {
+            return this.imgclass;
+        };
+        this.getScoreClass = function () {
+            return this.scoreclass;
+        };
+        this.isDead = function () {
+            return this.pv == 0;
+        }
+    }
+
     function Player() {
         this.life = 3;
         this.pv = 100;
@@ -81,6 +107,7 @@ $(function () {
     var inventory = new Inventory();
     var evazan = new Enemy();
     var hommeDesSables = [new HommeDesSables('life-sm-1'), new HommeDesSables('life-sm-2'), new HommeDesSables('life-sm-3')];
+    var stormTroopers = [new Stormtrooper('img-st-1','st-1'), new Stormtrooper('img-st-2','st-2'),new Stormtrooper('img-st-3','st-3'),new Stormtrooper('img-st-4','st-4'),new Stormtrooper('img-st-5','st-5')]
 
     var buttons = $(".section button");
     var lifeDiv = $(".life");
@@ -108,10 +135,26 @@ $(function () {
         lifeDiv.find("span.value").html(player.getLife());
         pvDiv.find("span.value").html(player.getPV());
         $(".enemy-life").html(evazan.getPV() + " PDV");
+
         for(var i = 0; i < hommeDesSables.length; i++ ) {
           var classe = "." + hommeDesSables[i].getClass();
-          console.log($(classe));
           $(classe).html(hommeDesSables[i].getPV() + " PDV");
+        }
+
+        for(var x = 0; x < stormTroopers.length; x++ ) {
+            var classes = "." + stormTroopers[x].getScoreClass();
+            $(classes).html(stormTroopers[x].getPV() + " PDV");
+        }
+
+        var cptDead = 0;
+        for(var y = 0; y < stormTroopers.length; y++ ) {
+            if (stormTroopers[y].isDead())
+                cptDead ++;
+        }
+
+        if(cptDead == 5){
+            $(".section").hide();
+            goToSection('findLeia');
         }
 
         if (inventory.getPotion().nb > 0) {
@@ -180,7 +223,7 @@ $(function () {
           var target = hommeDesSables[rand];
           //degats sur les enemis
           if(target.getPV() - target.getDamage() <= 0) {
-              endFightSandMans();
+
           } else {
               target.setPV(target.getPV() - target.getDamage());
               refresh();
@@ -201,6 +244,41 @@ $(function () {
               player.setPV(player.getPV() - target.getDamage());
               refresh();
           }
+        },
+
+        combat : function () {
+            //number between 0 and 4
+            var rand = Math.floor(Math.random()*(4-0+1));
+
+            while (stormTroopers[rand].getPV() == 0 ){
+                rand = Math.floor(Math.random()*(4-0+1));
+            }
+
+            var target = stormTroopers[rand];
+
+            for(var i = 0; i < stormTroopers.length; i ++) {
+                if(player.getPV() - stormTroopers[i].getDamage() <= 0) {
+                    if(player.getLife()  == 0) {
+                        endGame();
+                    } else {
+                        player.resetPv();
+                        player.setLife(player.getLife() - 1);
+                        refresh();
+                    }
+                } else {
+                    player.setPV(player.getPV() - stormTroopers[i].getDamage());
+                    refresh();
+                }
+            }
+
+            //degats sur les enemis
+            if(target.getPV() - target.getDamage() <= 0) {
+                target.setPV(0);
+            } else {
+                target.setPV(target.getPV() - player.getDamage());
+                refresh();
+            }
+
         }
     };
 
@@ -230,6 +308,10 @@ $(function () {
     }
 
     function endFightSandMans () {
+
+    }
+
+    function endFightStormtrooper () {
 
     }
 
