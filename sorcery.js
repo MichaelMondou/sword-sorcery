@@ -35,7 +35,7 @@ $(function () {
         this.pv = 100;
         this.imgclass = imgclasse;
         this.scoreclass = scoreclasse;
-        this.damage = 5;
+        this.damage = 9;
 
         this.getPV = function () {
             return this.pv;
@@ -114,6 +114,8 @@ $(function () {
     var pvDiv = $(".pv");
     var potionDiv = $(".potion");
 
+    var alreadyDone = false;
+
     buttons.click(function () {
         $(this).parents("div:first").hide();
         goToSection($(this).attr("go"));
@@ -152,9 +154,10 @@ $(function () {
                 cptDead ++;
         }
 
-        if(cptDead == 5){
+        if(cptDead == 5 && alreadyDone == false){
             $(".section").hide();
             goToSection('findLeia');
+            alreadyDone = true;
         }
 
         if (inventory.getPotion().nb > 0) {
