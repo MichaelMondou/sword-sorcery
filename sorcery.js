@@ -116,6 +116,10 @@ $(function () {
 
     var alreadyDone = false;
 
+    var tatooineChecked = false;
+    var eisleyChecked = false;
+    var etoileNoireChecked = false;
+
     buttons.click(function () {
         $(this).parents("div:first").hide();
         goToSection($(this).attr("go"));
@@ -288,9 +292,37 @@ $(function () {
     functions['init']();
 
     function goToSection(key) {
-        var section = $("#" + key);
-        section.show();
-        executeAction(section);
+        if(key == 'begin') {
+            tatooineChecked = true;
+        } else if(key == 'takeYourCojones') {
+            eisleyChecked = true;
+        } else if(key == 'leaveMosEisley') {
+            etoileNoireChecked = true;
+        }
+
+        if(key == 'intro') {
+            if(etoileNoireChecked) {
+                var sectionEtoileNoire = $("#" + 'leaveMosEisley');
+                sectionEtoileNoire.show();
+                executeAction(sectionEtoileNoire);
+            } else if(eisleyChecked) {
+                var sectionMosEisley = $("#" + 'takeYourCojones');
+                sectionMosEisley.show();
+                executeAction(sectionMosEisley);
+            }else if(tatooineChecked) {
+                var sectionTatooin = $("#" + 'begin');
+                sectionTatooin.show();
+                executeAction(sectionTatooin);
+            }else {
+                var sectionDefault = $("#" + key);
+                sectionDefault.show();
+                executeAction(sectionDefault);
+            }
+        } else {
+            var section = $("#" + key);
+            section.show();
+            executeAction(section);
+        }
     }
 
     function executeAction(section) {
