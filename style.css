@@ -1,88 +1,232 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@font-face {
+    font-family: 'starwars';
+    src: url('fonts/Starjedi.eot');
+    src: url('fonts/Starjedi.otf') format('truetype'),
+    url('fonts/Starjedi.woff') format('woff'),
+    url('fonts/Starjedi.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Starjedi.svg#StarjediBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
-	font-size : 13pt;
-	font-family : "Trebuchet MS", Arial, sans-serif;
+    width: 100%;
+    background: url(img/intro-wallpaper.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.backgrounds {
+    display: none;
+}
+
+.intro-inner {
+    margin-top: 50vh; /* poussé de la moitié de hauteur de viewport */
+    transform: translateY(-50%); /* tiré de la moitié de sa propre hauteur */
+}
+
+.intro button {
+    border: 3px solid transparent;
+}
+
+.logo {
+    width: 270px;
+    display: block;
+    margin: 30px auto;
+}
+
+.status {
+    display: none;
+}
+
+.status-inner {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.status ul {
+    list-style: none;
+    text-align: center;
+    min-width: 320px;
+    height: 100px;
+}
+
+.status ul li {
+    display: inline-block;
+    line-height: 100px;
+    padding: 0 20px;
+}
+
+.status ul li .text {
+    font-family: starwars, sans-serif;
+    font-size: 15px;
+}
+
+.status .life .value,
+.status .pv .value,
+.status .potion .value {
+    display: inline-block;
+}
+
+.status .life img {
+    width: 30px;
+    height: 45px;
 }
 
 h2 {
-	margin-top : 0px;
-	font-weight : bold;
+    font-family: starwars, sans-serif;
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-#status {
-	position : absolute;
-	top : 0px;
-	width : 100%;
-	text-align : center;
-	border-bottom : 1px solid lightGray;
+p {
+    color: black;
+    font-family: Verdana, sans-serif;
+    font-size: 12px;
+    padding: 10px 10px;
+    border-radius: 3px;
+    background-color: rgba(224, 205, 169, 0.7);
 }
 
-#status div {
-	display : inline-block;
-	padding : 10px 20px;
-	color : gray;
-	border-left : 1px solid lightGray;
-	border-right : 1px solid lightGray;
-}
-#status div+div {
-	border-left : none;
+.buttons {
+    margin: 30px 30px;
 }
 
-.section {
-	padding : 10px;
-	margin : auto;
-	margin-top : 100px;
-	max-width : 600px;
-	border : 1px solid lightGray;
-}
-.section#intro {
-	display : block;
-}
-.section button {
-	display : block;
-	width : 100%;
-	color : black;
-	text-decoration : none;
-	padding : 5px;
-	margin-top : 30px;
-	background : lightGray;
-	border : none;
-	cursor : pointer;
-}
-.section button+button  {
-	margin-top : 10px;
+button {
+    display: block;
+    width: auto;
+    min-width: 120px;
+    height: auto;
+    margin: 5px auto;
+    padding: 10px 10px;
+    font-family: starwars, sans-serif;
+    font-size: 12px;
+    border: none;
+    border-radius: 3px;
 }
 
-.section button:hover {
-	color : lightGray;
-	background-color : black;
+.intro button {
+    height: auto;
+    display: block;
+    margin: 30px auto;
+    background-color: yellow;
+    color: black;
 }
 
-.battle {
-	padding : 10px 10px;
-	margin : 20px 0px;
-	box-shadow : 0px 2px 8px gray;
+.tatooine p,
+.tatooine button {
+    background-color: rgba(224, 205, 169, 0.7);
+    color: black;
 }
 
-img {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+.mos-eisley h2,
+.death-star h2 {
+    color: white;
 }
 
-.enemy-life, .life-sm-1, .life-sm-2, .life-sm-3 {
-	text-align: center;
+.mos-eisley p,
+.mos-eisley button,
+.cantina p,
+.cantina button,
+.death-star p,
+.death-star button{
+    background-color: rgba(255, 255, 255, 0.7);
+    color: black;
 }
 
-.life-sm-1, .life-sm-2, .life-sm-3 {
-	float: left;
-	margin-left: 100px;
+.cantina .image,
+.death-star .image {
+    color: white;
 }
 
-.img-sm-1,.img-sm-2,.img-sm-3 {
-	float: left;
+.images {
+    list-style: none;
+    text-align: center;
+    min-width: 320px;
+    margin-top: 30px;
 }
 
-.img-st-1,.img-st-2,.img-st-3,.img-st-4, img-st-5 {
-    width: 200px;
-    height: 200px;
+.image {
+    display: block;
+}
+
+.images li {
+    display: inline-block;
+    padding: 0 20px;
+    font-family: starwars, sans-serif;
+    font-size: 15px;
+}
+
+.images li img {
+    width: 50px;
+}
+
+@media (min-width: 640px) {
+    .logo {
+        width: 350px;
+    }
+
+    .status ul li .text {
+        font-size: 22px;
+    }
+
+    .wrapper {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    p {
+        font-size: 16px;
+        padding: 30px 30px;
+    }
+
+    .buttons {
+        text-align: center;
+    }
+
+    button {
+        font-size: 16px;
+        display: inline-block;
+    }
+
+    .images li {
+        padding: 0 30px;
+        font-size: 16px;
+    }
+
+    .images li img {
+        width: 70px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .intro button:hover {
+        border-color: yellow;
+        background-color: transparent;
+        color: yellow;
+    }
+
+    .wrapper {
+        width: 70%;
+    }
+
+    .images li {
+        padding: 0 50px;
+    }
+
+    .images li img {
+        width: 100px;
+    }
 }
