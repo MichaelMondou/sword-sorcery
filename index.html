@@ -3,454 +3,750 @@
 <head>
     <script src="jquery.js"></script>
     <script src="sorcery.js"></script>
+    <meta name="viewport"
+          content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, width=device-width">
     <link type="text/css" rel="stylesheet" href="style.css"/>
     <meta lang="fr" xml:lang="fr" content="text/html;charset=UTF-8" http-equiv="Content-Type">
     <title>Sword & Sorcery</title>
 </head>
 
 <body>
-<div id="status">
-    <div class="life">
-        Nb de vies : <span class="value">--</span>
-    </div>
-    <div class="pv">
-        PV : <span class="value">--</span>
-    </div>
-    <div class="potion">
-        Potion : <span class="value">--</span>
+
+<div class="backgrounds"></div>
+<div id="status" class="status">
+    <div class="status-inner">
+        <ul>
+            <li class="life">
+                <div class="text">
+                    <span>vies : </span>
+                    <div class="value"></div>
+                </div>
+            </li>
+            <li class="pv">
+                <div class="text">
+                    <span>pv : </span>
+                    <div class="value"></div>
+                </div>
+            </li>
+            <li class="potion">
+                <div class="text">
+                    <span>potion : </span>
+                    <div class="value"></div>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>
 
-<div class="section" id="intro">
-    <h2>Star wars : Un nouvel espoir</h2>
-
+<div class="intro section" id="intro">
+    <div class="intro-inner">
+        <img class="logo" src="img/starwars-logo.png" alt="Star wars Logo"/>
+        <button go="begin">commencer</button>
+    </div>
     <action name="reset"/>
-
-    <button go="begin">Commencer</button>
 </div>
 
 
 <div class="section" id="begin">
-
-    TATOOINE
-
-    Vous êtes un jeune homme de 19 ans vivant sur une planète remplie de sable et de créatures dangereuses et
-    étranges.<br/>
-    Votre nom : Luke Skywalker, fils d'un père transporteur d'épices et d'une mère dont vous ignorez tout d'elle.<br/>
-    Vous vivez avec votre oncle "Owen" et votre tante "Beru".
+    <div class="wrapper">
+        <div class="tatooine">
+            <h2>tatooine</h2>
+            <p>Vous êtes un jeune homme de 19 ans vivant sur une planète remplie de sable et de créatures
+                dangereuses et étranges.<br/>
+                Votre nom : <strong>Luke Skywalker</strong>, fils d'un père transporteur d'épices et d'une mère dont
+                vous ignorez tout d'elle.<br/>
+                Vous vivez avec votre oncle "Owen" et votre tante "Beru".</p>
+            <div class="buttons">
+                <button go="good">très bien</button>
+                <button go="not-good">je ne suis pas d'accord</button>
+            </div>
+        </div>
+    </div>
 
     <action name="start"/>
-
-    <button go="good">Très bien</button>
-    <button go="not-good">Je ne suis pas d'accord</button>
+    <action name="changeBackground"/>
+    <action name="changeStatusColorToBlack"/>
 </div>
 
 <div class="section" id="not-good">
-    Ok bah du coup la partie est terminée. Fallait pas chercher dès le début aussi...
-    <button go="intro">Ok je ne le referrai plus</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Ok bah du coup la partie est terminée. Fallait pas chercher dès le début aussi...</p>
+            <div class="buttons">
+                <button go="intro">ok je ne le referrai plus</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="good">
-    Un convoi de Jawas arrive, votre oncle vous demande d'aller jeter un coup d'oeil.
-    Au même moment votre tante vous appelle. Que voulez-vous faire ?
-    <button go="goToUncle">Aller voir votre oncle</button>
-    <button go="goToAunt">Aller voir votre tante</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Un convoi de Jawas arrive, votre oncle vous demande d'aller jeter un coup d'oeil.<br/>
+                Au même moment votre tante vous appelle. Que voulez-vous faire ?</p>
+            <div class="buttons">
+                <button go="goToUncle">aller voir votre oncle</button>
+                <button go="goToAunt">aller voir votre tante</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <div class="section" id="goToAunt">
-    Luke ! Dis à ton oncle que s'il veut acheter un traducteur il faut qu'il parle le Bocce !
-
-    Comme vous êtes un gentil garçon qui écoute sa tante, vous gagnez une potion.
-
-    <action name="potionWin" />
-
-    <button go="goToUncle">Revenir voir votre oncle</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Luke ! Dis à ton oncle que s'il veut acheter un traducteur il faut qu'il parle le Bocce !<br/>
+                Comme vous êtes un gentil garçon qui écoute sa tante, vous gagnez une potion.</p>
+            <div class="buttons">
+                <button go="goToUncle">revenir voir votre oncle</button>
+            </div>
+        </div>
+    </div>
+    <action name="potionWin"/>
 </div>
 
 <div class="section" id="goToUncle">
-    Votre oncle vous dit de charger deux droïdes et de les emmener au garage pour les remettre à neuf.
-    <button go="goToGarage">Accepter</button>
-    <button go="contestUncle">Contester car vous devez aller à la station Toshi car les pompes à lazo-convecteur sont
-        arrivées.
-    </button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Votre oncle vous dit de charger deux droïdes et de les emmener au garage pour les remettre à neuf.</p>
+            <div class="buttons">
+                <button go="goToGarage">accepter</button>
+                <button go="contestUncle">
+                    contester car vous devez aller à la station Toshi car les pompes à lazo-convecteur sont arrivées.
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="contestUncle">
-    Tu iras t'amuser avec tes copains pilotes quand ton travail sera terminé. File !
-    Vous prenez une baffe. Ca vous apprendra à répondre à votre oncle. Mal élevé !
-
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Tu iras t'amuser avec tes copains pilotes quand ton travail sera terminé. File !<br/>
+                Vous prenez une baffe. Ca vous apprendra à répondre à votre oncle. Mal élevé !</p>
+            <div class="buttons">
+                <button go="goToGarage">aller au garage</button>
+            </div>
+        </div>
+    </div>
     <action name="hit"/>
-
-    <button go="goToGarage">Aller au garage</button>
 </div>
 
 <div class="section" id="goToGarage">
-    En allant au garage, un des deux droïdes crâme ses circuits. Le second vous propose
-    un autre droïde en parfait état.
-
-    <button go="proposeToUncle">Dire à votre oncle de prendre l'autre droïde</button>
-    <button go="continueYourWay">Ne pas l'écouter et continuer votre chemin</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>En allant au garage, un des deux droïdes crâme ses circuits. Le second vous propose
+                un autre droïde en parfait état.</p>
+            <div class="buttons">
+                <button go="proposeToUncle">dire à votre oncle de prendre l'autre droïde</button>
+                <button go="continueYourWay">ne pas l'écouter et continuer votre chemin</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="continueYourWay">
-    Vous nettoyez le droïde et allez rejoindre vos amis pilotes. Vous n'avez pas pu voir
-    le message caché dans l'autre droïde. La galaxie est dans la merde.
-    Partie terminée.
-    <button go="intro">Recommencer</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Vous nettoyez le droïde et allez rejoindre vos amis pilotes. Vous n'avez pas pu voir le message caché
+                dans l'autre droïde.<br/>
+                La galaxie est dans la merde. Partie terminée. </p>
+            <div class="buttons">
+                <button go="intro">recommencer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="proposeToUncle">
-    Vous faites connaissance avec vos droïdes, l'un se nomme C-3PO et l'autre R2D2. Vous apprenez
-    qu'il sont au courant de la rébellion contre l'empire et qu'ils ont assisté à des batailles.
-    En nettoyant R2D2 vous tomber sur un message vidéo où une princesse prononce :
-    "Au secours Obi-Wan Kenobi, vous êtes mon seul espoir". Au même moment votre tante vous appelle.
-    <button go="goToAunt2">Aller voir votre tante</button>
-    <button go="tryToRepair">Essayer de réparer le droïde pour voir le message</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Vous faites connaissance avec vos droïdes, l'un se nomme C-3PO et l'autre R2D2. Vous apprenez
+                qu'il sont au courant de la rébellion contre l'empire et qu'ils ont assisté à des batailles.<br/>
+                En nettoyant R2D2 vous tomber sur un message vidéo où une princesse prononce :
+                "Au secours Obi-Wan Kenobi, vous êtes mon seul espoir". Au même moment votre tante vous appelle.</p>
+            <div class="buttons">
+                <button go="goToAunt2">aller voir votre tante</button>
+                <button go="tryToRepair">essayer de réparer le droïde pour voir le message</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="tryToRepair">
-    Petit curieux, en tentant de le réparer le message a disparu ! BRAVO !
-    <button go="tryToRepair2">Continuer à réparer</button>
-    <button go="goToAunt2">Aller voir votre tante</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Petit curieux, en tentant de le réparer le message a disparu ! BRAVO ! </p>
+            <div class="button">
+                <button go="tryToRepair2">continuer à réparer</button>
+                <button go="goToAunt2">aller voir votre tante</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="tryToRepair2">
-    Vous êtes mauvais. Ca ne marche toujours pas.
-    <button go="tryToRepair2">Continuer à réparer</button>
-    <button go="goToAunt2">Aller voir votre tante</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Vous êtes mauvais. Ca ne marche toujours pas.</p>
+            <div class="buttons">
+                <button go="tryToRepair2">continuer à réparer</button>
+                <button go="goToAunt2">aller voir votre tante</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="goToAunt2">
-    C'est l'heure du repas. Vous demandez à votre oncle de rejoindre l'académie une fois les droïdes
-    réparés. Il refuse.
-    <button go="continueToArgument">Continuer d'argumenter</button>
-    <button go="rageToDroids">Aller rager sur les droïdes</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>C'est l'heure du repas. Vous demandez à votre oncle de rejoindre l'académie une fois les droïdes
+                réparés. Il refuse.</p>
+            <div class="buttons">
+                <button go="continueToArgument">continuer d'argumenter</button>
+                <button go="rageToDroids">aller rager sur les droïdes</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="continueToArgument">
-    Il refuse. Vous prenez une baffe.
-
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Il refuse. Vous prenez une baffe.</p>
+            <div class="buttons">
+                <button go="continueToArgument">continuer d'argumenter</button>
+                <button go="rageToDroids">aller rager sur les droïdes</button>
+            </div>
+        </div>
+    </div>
     <action name="hit"/>
-
-    <button go="continueToArgument">Continuer d'argumenter</button>
-    <button go="rageToDroids">Aller rager sur les droïdes</button>
 </div>
 
 <div class="section" id="rageToDroids">
-    En rentrant au garage, C-3PO vous annonce que R2D2 s'est fait la malle.
-
-    <button go="goToR2D2">Partir à sa recherche</button>
-    <button go="waitTheMorning">Attendre le lendemain matin</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>En rentrant au garage, C-3PO vous annonce que R2D2 s'est fait la malle.</p>
+            <div class="buttons">
+                <button go="goToR2D2">partir à sa recherche</button>
+                <button go="waitTheMorning">attendre le lendemain matin</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="goToR2D2">
-    Vous tombez nez à nez avec 3 hommes des sables !! OMG !!
-
-
-    <img class="img-sm-1" src="./sandman.jpeg" alt="">
-
-    <img class="img-sm-2" src="./sandman.jpeg" alt="">
-
-    <img class="img-sm-3" src="./sandman.jpeg" alt="">
-
-    <p class="life-sm-1"></p>
-    <p class="life-sm-2"></p>
-    <p class="life-sm-3"></p>
-
-    <action name="hitSandMan"></action>
-    <button go="goToR2D2">Frapper au pif ?? Sur un malentendu ça peut passer ...</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Vous tombez nez à nez avec 3 pillards Tusken ! Vous en cognez un mais ils sont très résistants.</p>
+            <ul class="images">
+                <li>
+                    <span class="image life-sm-1"></span>
+                    <img class="img-sm-1" src="img/tusken.png" alt="Tusken"/>
+                </li>
+                <li>
+                    <span class="image life-sm-2"></span>
+                    <img class="img-sm-2" src="img/tusken.png" alt="Tusken"/>
+                </li>
+                <li>
+                    <span class="image life-sm-3"></span>
+                    <img class="img-sm-3" src="img/tusken.png" alt="Tusken"/>
+                </li>
+            </ul>
+            <div class="buttons">
+                <button go="goToR2D2">refrapper au pif ?? sur un malentendu ça peut passer ...</button>
+            </div>
+        </div>
+    </div>
+    <action name="hitSandMan"/>
 </div>
 
 <div class="section" id="waitTheMorning">
-    Le soleil s'est levé, vous partez à la recherche de R2D2
-    Vous le trouver après quelques heures. Il vous indique que des créatures approchent par le sud.
-    <button go="goToHome">Vous rentrez chez vous</button>
-    <button go="takeALook">Vous allez jeter un coup d'oeil</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Le soleil s'est levé, vous partez à la recherche de R2D2.<br/>
+                Vous le trouver après quelques heures. Il vous indique que des créatures approchent par le sud.</p>
+            <div class="buttons">
+                <button go="goToHome">vous rentrez chez vous</button>
+                <button go="takeALook">vous allez jeter un coup d'oeil</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="goToHome">
-    Vous rentrez chez vous. Vous n'avez pas rencontré le vieux Ben.
-    La galaxie est dans la merde.
-    <button go="intro">Recommencer</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Vous rentrez chez vous. Vous n'avez pas rencontré le vieux Ben.<br/>
+                La galaxie est dans la merde.</p>
+            <div class="buttons">
+                <button go="intro">recommencer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="takeALook">
-    Les hommes des sables vous ont assomé, vous perdez un point de vie. Par chance le vieux Ben vous trouve et vous
-    sauve la vie. Vous apprenez son vrai nom : Obi-Wan Kenobi. Vous rentrez chez vous avec le vieux.
-
-    Ben était un ami de votre père. il vous donne une arme que vous a légué votre père. Un sabre laser.
-    Il vous apprend que votre père a été massacré comme tous les autres JEDI par un JEDI nommé Dark Vador.
-    Il a été soudoyé par les adversaires de la Force, celle qui donne aux chevaliers JEDI leur pouvoir.
-    Ben décode le message de R2D2, la princesse a besoin que Ben aille sur la planète Alderaan
-    pour donner les plans de l'étoile noire (base spatiale de la taille d'une lune capable
-    d'anéantir une planète entière) à son père.
-    Ben vous demande de l'accompagner.
-
-    <button go="acceptBen">Vous acceptez</button>
-    <button go="refuseBen">Vous refusez</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Les hommes des sables vous ont assomé, vous perdez un point de vie. Par chance le vieux Ben vous trouve
+                et vous sauve la vie.<br/>
+                Vous apprenez son vrai nom : Obi-Wan Kenobi. Vous rentrez chez vous avec le vieux.<br/>
+                Ben était un ami de votre père. il vous donne une arme que vous a légué votre père. Un sabre laser.
+                Il vous apprend que votre père a été massacré comme tous les autres JEDI par un JEDI nommé Dark Vador.
+                Il a été soudoyé par les adversaires de la Force, celle qui donne aux chevaliers JEDI leur pouvoir.
+                Ben décode le message de R2D2, la princesse a besoin que Ben aille sur la planète Alderaan
+                pour donner les plans de l'étoile noire (base spatiale de la taille d'une lune capable
+                d'anéantir une planète entière) à son père.<br/>
+                Ben vous demande de l'accompagner.</p>
+            <div class="buttons">
+                <button go="acceptBen">vous acceptez</button>
+                <button go="refuseBen">vous refusez</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <div class="section" id="acceptBen">
-    Vous partez dire au revoir à votre oncle et votre tante et vous croisez le véhicule détruit des
-    Jawas qui vous ont vendu vos droïdes. Ben devine que c'est l'oeuvre de l'empire.
-    Vous comprenez que votre oncle et votre tante sont en danger.
-    <button go="goToUncleAndAunt">Les rejoindre</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Vous partez dire au revoir à votre oncle et votre tante et vous croisez le véhicule détruit des
+                Jawas qui vous ont vendu vos droïdes. Ben devine que c'est l'oeuvre de l'empire.
+                Vous comprenez que votre oncle et votre tante sont en danger.</p>
+            <div class="buttons">
+                <button go="goToUncleAndAunt">les rejoindre</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="refuseBen">
-    Vous revenez chez votre oncle et votre tante et vous croisez le véhicule détruit des
-    Jawas qui vous ont vendu vos droïdes. Ben devine que c'est l'oeuvre de l'empire.
-    Vous comprenez que votre oncle et votre tante sont en danger.
-    <button go="goToUncleAndAunt">Les rejoindre</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>Vous revenez chez votre oncle et votre tante et vous croisez le véhicule détruit des
+                Jawas qui vous ont vendu vos droïdes. Ben devine que c'est l'oeuvre de l'empire.
+                Vous comprenez que votre oncle et votre tante sont en danger.</p>
+            <div class="buttons">
+                <button go="goToUncleAndAunt">les rejoindre</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <div class="section" id="goToUncleAndAunt">
-    En rentrant, vous voyez le domicile en feu et deux corps carbonisés à l'entrée.
-
-    <button go="cryLikeABaby">Vous vous apittoyez sur votre sort et pleurez comme un bébé.</button>
-    <button go="takeYourCojones">Vous prenez vos cojones dans la main et vous allez botter le cul de l'empire avec le
-        vieux.
-    </button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>En rentrant, vous voyez le domicile en feu et deux corps carbonisés à l'entrée.</p>
+            <div class="buttons">
+                <button go="cryLikeABaby">vous vous apittoyez sur votre sort et pleurez comme un bébé.</button>
+                <button go="takeYourCojones">vous prenez vos cojones dans la main et vous allez botter le cul de
+                    l'empire avec le vieux.
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <div class="section" id="cryLikeABaby">
-    La galaxie ne peut pas compter sur vous.
-    <button go="intro">Recommencer</button>
+    <div class="wrapper">
+        <div class="tatooine">
+            <p>La galaxie ne peut pas compter sur vous.</p>
+            <div class="buttons">
+                <button go="intro">recommencer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="takeYourCojones">
-    MOS EISLEY
-
-    Vous arrivez à Mos Eisley, ville de bandits et de chasseurs de primes.
-    Vous tombez nez à nez avec un groupe de clones. Ils vous demande où avez-vous eu vos droides.
-
-    <button go="tryToCombat">Vous cherchez un peu d'action pour vous dégourdir.</button>
-    <button go="hideBehindBen">Vous vous cachez sous la jupe d'Obi-Wan.</button>
+    <div class="wrapper">
+        <div class="mos-eisley">
+            <h2>mos eisley</h2>
+            <p>Vous arrivez à Mos Eisley, ville de bandits et de chasseurs de primes.
+                Vous tombez nez à nez avec un groupe de clones. Ils vous demande où avez-vous eu vos droides.</p>
+            <div class="buttons">
+                <button go="tryToCombat">vous cherchez un peu d'action pour vous dégourdir</button>
+                <button go="hideBehindBen">vous vous cachez sous la jupe d'obi-wan</button>
+            </div>
+        </div>
+    </div>
+    <action name="changeBackground"/>
 </div>
 
 
 <div class="section" id="tryToCombat">
-    Les clones sont plus forts que vous mais Obi-wan vous sauve de justesse. Vous perdez une vie.
-
+    <div class="wrapper">
+        <div class="mos-eisley">
+            <p>Les clones sont plus forts que vous mais Obi-wan vous sauve de justesse. Vous perdez une vie.</p>
+            <div class="buttons">
+                <button go="goToCantina">continuer</button>
+            </div>
+        </div>
+    </div>
     <action name="hit"/>
-
-    <button go="goToCantina">Continuer</button>
 </div>
 
 <div class="section" id="hideBehindBen">
-    Ben utilise le pouvoir de persuasion et vous passez sans difficulté.
-
-    <button go="goToCantina">Continuer</button>
+    <div class="wrapper">
+        <div class="mos-eisley">
+            <p>Ben utilise le pouvoir de persuasion et vous passez sans difficulté.</p>
+            <div class="buttons">
+                <button go="goToCantina">continuer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
 <div class="section" id="goToCantina">
-    Vous entrez dans la cantina pour chercher un pilote capable de vous emmener à Alderaan.
-
-    <button go="goToBar">Aller au bar</button>
-    <button go="rejoinBen">Rejoindre Ben</button>
-    <button go="makeATour">Faire une tour</button>
+    <div class="wrapper">
+        <div class="cantina">
+            <p>Vous entrez dans la cantina pour chercher un pilote capable de vous emmener à Alderaan.</p>
+            <div class="buttons">
+                <button go="goToBar">aller au bar</button>
+                <button go="rejoinBen">rejoindre ben</button>
+                <button go="makeATour">faire une tour</button>
+            </div>
+        </div>
+    </div>
+    <action name="changeBackground"/>
 </div>
 
 <div class="section" id="goToBar">
-    Vous voulez un verre mais un mec vous cherche et dit que vous avez une sale gueule. Et c'est vrai que vous en avez
-    une.
-
-    <button go="hideBehindBen2">Vous vous cachez sous la jupe d'Obi-Wan</button>
-    <button go="fight1">Vous voulez vous battre.</button>
+    <div class="wrapper">
+        <div class="cantina">
+            <p>Vous voulez un verre mais un mec vous cherche et dit que vous avez une sale gueule. Et c'est vrai que
+                vous en avez une.</p>
+            <div class="buttons">
+                <button go="hideBehindBen2">vous vous cachez sous la jupe d'obi-wan</button>
+                <button go="fight1">vous voulez vous battre.</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="hideBehindBen2">
-    Obi-Wan arrive et sort son sabre laser et coupe le bras de votre adversaire.
-
-    <button go="makeATour">Continuer à marcher dans le bar</button>
-    <button go="rejoinBen">Rejoindre Ben</button>
+    <div class="wrapper">
+        <div class="cantina">
+            <p>Obi-Wan arrive et sort son sabre laser et coupe le bras de votre adversaire.</p>
+            <div class="buttons">
+                <button go="makeATour">continuer à marcher dans le bar</button>
+                <button go="rejoinBen">rejoindre ben</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="fight1">
-    Votre adversaire vous cogne. Vous perdez un point de vie.
-
+    <div class="wrapper">
+        <div class="cantina">
+            <p>Votre adversaire vous cogne.</p>
+            <ul class="images">
+                <li>
+                    <span class="image enemy-life"></span>
+                    <img src='img/evazan.png' alt="Evazan">
+                </li>
+            </ul>
+            <div class="buttons">
+                <button go="fight1">le cogner à votre tour</button>
+                <button go="hideBehindBen2">se cacher sous la jupe d'obi-wan</button>
+            </div>
+        </div>
+    </div>
     <action name="fight"/>
-
-    <img src='http://media.ignimgs.com/media/ign/imgs/star-wars-characters/100_evazan_starwars.jpg'>
-    <p class="enemy-life"></p>
-
-    <button go="fight1">Le cogner à votre tour</button>
-    <button go="hideBehindBen2">Se cacher sous la jupe d'Obi-Wan</button>
 </div>
 
-<div class="section" id="hitMan">
-    Votre adversaire n'en a pas fini et vous recogne. Vous perdez un point de vie.
-
-    <action name="fight"/>
-
-    <button go="hitMan">Le recogner à votre tour</button>
-    <button go="hideBehindBen2">Se cacher sous la jupe d'Obi-Wan</button>
+<div class="section" id="victoryBar">*
+    <div class="wrapper">
+        <div class="cantina">
+            <p>Votre adversaire est au sol.</p>
+            <div class="buttons">
+                <button go="makeATour">faire le tour du bar</button>
+                <button go="goToBar">aller au bar</button>
+                <button go="rejoinBen">rejoindre ben</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="makeATour">
-    Vous voyez des gueules bizarres, c'est tout ce qu'il y a dans ce bled pourri.
-
-    <button go="makeATour">Continuer à faire le tour du bar</button>
-    <button go="goToBar">Aller au bar</button>
-    <button go="rejoinBen">Rejoindre Ben</button>
+    <div class="wrapper">
+        <div class="cantina">
+            <p>Vous voyez des gueules bizarres, c'est tout ce qu'il y a dans ce bled pourri.</p>
+            <div class="buttons">
+                <button go="makeATour">continuer à faire le tour du bar</button>
+                <button go="goToBar">aller au bar</button>
+                <button go="rejoinBen">rejoindre ben</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="rejoinBen">
-    Vous discutez avec un contrebandier du nom de Han Solo quie st en compagnie de son compagnon
-    Chewbacca. Il peut vous mener là où vous le souhaiter.
-
-    <button go="leaveMosEisley">Continuer</button>
+    <div class="wrapper">
+        <div class="cantina">
+            <p>Vous discutez avec un contrebandier du nom de Han Solo qui est en compagnie de son compagnon
+                Chewbacca. Il peut vous mener là où vous le souhaiter.</p>
+            <div class="buttons">
+                <button go="leaveMosEisley">continuer</button>
+            </div>
+        </div>
+    </div>
+    <action name="changeBackground"/>
 </div>
 
 <div class="section" id="leaveMosEisley">
-    L'ETOILE NOIRE
-
-    En arrivant à destination vous tombez sur une pluie d'astéroïdes et aucune planète en vue.
-    Un chasseur TIE vous passe au dessus.
-
-    Vous voyez une lune au loin qui se trouve en fait être l'étoile de la mort. Vous voulez faire
-    demi-tour mais l'attraction de l'étoile vous en empêche. Vous atterissez sur une plateforme
-    dans la base.
-
-    <button go="hide">Se cacher</button>
-    <button go="makeFront">Faire face</button>
+    <div class="wrapper">
+        <div class="death-star">
+            <h2>l'étoile noire</h2>
+            <p>En arrivant à destination vous tombez sur une pluie d'astéroïdes et aucune planète en vue.
+                Un chasseur TIE vous passe au dessus.<br/>
+                Vous voyez une lune au loin qui se trouve en fait être l'étoile de la mort. Vous voulez faire
+                demi-tour mais l'attraction de l'étoile vous en empêche. Vous atterissez sur une plateforme
+                dans la base.</p>
+            <div class="buttons">
+                <button go="hide">se cacher</button>
+                <button go="makeFront">faire face</button>
+            </div>
+        </div>
+    </div>
+    <action name="changeBackground"/>
+    <action name="changeStatusColorToWhite"/>
 </div>
 
 <div class="section" id="makeFront">
-    Vous tombez face à Dark Vador qui vous tue. Bravo c'était un bon choix.
-    <button go="intro">Recommencer</button>
+    <div class="wrapper">
+        <div class="death-star">
+            <p>Vous tombez face à Dark Vador qui vous tue. Bravo c'était un bon choix.</p>
+            <div class="buttons">
+                <button go="intro">recommencer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="hide">
-    Deux stormtroopers passent.
-    <button go="wait">Attendre</button>
-    <button go="hitThem">Les assommer</button>
+    <div class="wrapper">
+        <div class="death-star">
+            <p>Deux stormtroopers passent.</p>
+            <div class="buttons">
+                <button go="wait">attendre</button>
+                <button go="hitThem">les assommer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="wait">
-    Vous attendez. Deux autres stormtroopers passent.
-    <button go="wait">Attendre</button>
-    <button go="hitThem">Les assommer</button>
+    <div class="wrapper">
+        <div class="death-star">
+            <p>Vous attendez. Deux autres stormtroopers passent.</p>
+            <div class="buttons">
+                <button go="wait">attendre</button>
+                <button go="hitThem">les assommer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="hitThem">
-    Vous avez un nouvel équipement qui permet d'accèder au diagramme de l'étoile noire.
-    R2D2 décode l'emplacement du rayon magnétique qui vous empêche de redécoller.
-    Ben décide d'y aller seul. R2D2 trouve où est enfermée la princesse Leia.
-    <button go="goAlone">Y aller seul</button>
-    <button go="askHelpToHan">Demander de l'aide à Han</button>
+    <div class="wrapper">
+        <div class="death-star">
+            <p>Vous avez un nouvel équipement qui permet d'accèder au diagramme de l'étoile noire.
+                R2D2 décode l'emplacement du rayon magnétique qui vous empêche de redécoller.
+                Ben décide d'y aller seul. R2D2 trouve où est enfermée la princesse Leia.</p>
+            <div class="buttons">
+                <button go="goAlone">y aller seul</button>
+                <button go="askHelpToHan">demander de l'aide à han</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="goAlone">
-    Vous tombez face à une horde de stormtroopers. Ils sont trop nombreux. Vous êtes mort.
-
-    <button go="intro">Recommencer</button>
+    <div class="wrapper">
+        <div class="death-star">
+            <p>Vous tombez face à une horde de stormtroopers. Ils sont trop nombreux. Vous êtes mort.</p>
+            <div class="buttons">
+                <button go="intro">recommencer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="askHelpToHan">
-    Il refuse.
-    <button go="hanSucks">Lui dire que c'est un gros crevard</button>
-    <button go="leiaIsRich">Lui dire que la princesse est riche</button>
+    <div class="wrapper">
+        <div class="death-star">
+            <p>Il refuse.</p>
+            <div class="buttons">
+                <button go="hanSucks">lui dire que c'est un gros crevard</button>
+                <button go="leiaIsRich">lui dire que la princesse est riche</button>
+            </div>
+        </div>
+    </div>
+    <action name="changeBackground"/>
 </div>
 
 <div class="section" id="hanSucks">
-    Il est d'accord et refuse toujours.
-    <button go="hanSucks">Lui dire que c'est un gros crevard</button>
-    <button go="leiaIsRich">Lui dire que la princesse est riche</button>
+    <div class="wrapper">
+        <div class="death-star">
+            <p>Il est d'accord avec vous mais refuse toujours.</p>
+            <div class="buttons">
+                <button go="hanSucks">lui dire que c'est un gros crevard</button>
+                <button go="leiaIsRich">lui dire que la princesse est riche</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="leiaIsRich">
-    Maintenant il accepte. Vous lui dite que c'est quand même un gros crevard.
-    <button go="continueTheWay">Continuer</button>
+    <div class="wrapper">
+        <div class="death-star">
+            <p>Maintenant il accepte. Vous lui dite que c'est quand même un gros crevard.</p>
+            <div class="buttons">
+                <button go="continueTheWay">continuer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="continueTheWay">
-    Vous tomber face à une horde de soldat.
-
-    <img class="img-st-1" src="https://tse1.mm.bing.net/th?id=OIP.Mb12ae888213f3a225e5e60ab47340da9o0&pid=Api" alt="">
-    <p class="st-1"></p>
-    <img class="img-st-2" src="https://tse1.mm.bing.net/th?id=OIP.Mb12ae888213f3a225e5e60ab47340da9o0&pid=Api" alt="">
-    <p class="st-2"></p>
-    <img class="img-st-3" src="https://tse1.mm.bing.net/th?id=OIP.Mb12ae888213f3a225e5e60ab47340da9o0&pid=Api" alt="">
-    <p class="st-3"></p>
-    <img class="img-st-4" src="https://tse1.mm.bing.net/th?id=OIP.Mb12ae888213f3a225e5e60ab47340da9o0&pid=Api" alt="">
-    <p class="st-4"></p>
-    <img class="img-st-5" src="https://tse1.mm.bing.net/th?id=OIP.Mb12ae888213f3a225e5e60ab47340da9o0&pid=Api" alt="">
-    <p class="st-5"></p>
-
+    <div class="wrapper">
+        <div class="death-star">
+            <p>Vous tomber face à une horde de soldats.</p>
+            <ul class="images">
+                <li>
+                    <span class="image st-1"></span>
+                    <img class="img-st-1" src='img/stormtrooper.png' alt="Stormtrooper">
+                </li>
+                <li>
+                    <span class="image st-1"></span>
+                    <img class="img-st-1" src='img/stormtrooper.png' alt="Stormtrooper">
+                </li>
+                <li>
+                    <span class="image st-1"></span>
+                    <img class="img-st-1" src='img/stormtrooper.png' alt="Stormtrooper">
+                </li>
+                <li>
+                    <span class="image st-1"></span>
+                    <img class="img-st-1" src='img/stormtrooper.png' alt="Stormtrooper">
+                </li>
+                <li>
+                    <span class="image st-1"></span>
+                    <img class="img-st-1" src='img/stormtrooper.png' alt="Stormtrooper">
+                </li>
+            </ul>
+            <div class="buttons">
+                <button go="continueTheWay">pas le choix il faut frapper</button>
+            </div>
+        </div>
+    </div>
     <action name="combat"/>
-
-    <button go="continueTheWay">Porter ses couilles et taper #secpa</button>
 </div>
 
 <div class="section" id="findLeia">
-    Vous êtes toujours en vie. Vous trouvez la cellule de la princesse et vous la délivrez.
-
-    Vous arrivez à votre vaisseau. Au loin vous voyez Ben se battre contre Dark Vador.
-    Ce dernier donne un coup fatal à Ben qui tombe au sol.
-
-    <button go="nooooooo">NNNNOOOOONNNNN</button>
+    <div class="wrapper">
+        <div class="death-star">
+            <p>Vous êtes toujours en vie. Vous trouvez la cellule de la princesse et vous la délivrez.<br/>
+                Vous arrivez à votre vaisseau. Au loin vous voyez Ben se battre contre Dark Vador.
+                Ce dernier donne un coup fatal à Ben qui tombe au sol.</p>
+            <div class="buttons">
+                <button go="nooooooo">nnnnoooooooooooonnnnnnnnnnn</button>
+            </div>
+        </div>
+    </div>
+    <action name="changeBackground"/>
 </div>
 
 <div class="section" id="nooooooo">
-
-    Les stormtroopers vous tirent dessus.
-
-    <button go="shotThem">Vous les affrontez</button>
-    <button go="leaveTheDeathStar">Vous fuyez pauvres fous !</button>
+    <div class="wrapper">
+        <div class="death-star">
+            <p>Les stormtroopers vous tirent dessus.</p>
+            <div class="buttons">
+                <button go="shotThem">vous les affrontez</button>
+                <button go="leaveTheDeathStar">vous fuyez pauvres fous !</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="shotThem">
-    Ils sont beaucoup trop nombreux. Vous êtes morts.
-
-    <button go="intro">Recommencer</button>
+    <div class="wrapper">
+        <div class="death-star">
+            <p>Ils sont beaucoup trop nombreux. Vous êtes morts. Bah ouais faut pas vous prendre pour un héro non plus
+                !</p>
+            <div class="buttons">
+                <button go="intro">recommencer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="leaveTheDeathStar">
-
-    L'ALLIANCE REBELLE
-
-    Vous partez à bord du vaisseau.
-
-    Vous rejoignez l'alliance et retrouvez un de vos potes. Vous assistez à une réunion
-    indiquant comment détruire l'étoile de la mort. Il va falloir combattre sinon l'étoile
-    noire vous détruira.
-
-    <button go="fuckTheRebellion">Ni... la Rébellion je rentre sur Tatooine</button>
-    <button go="ofCourse">Bien sûr que j'y vais. J'ai pas fais tout ce chemin...</button>
+    <div class="wrapper">
+        <div class="alliance">
+            <h2>l'alliance rebelle</h2>
+            <p>Vous partez à bord du vaisseau. Vous rejoignez l'alliance et retrouvez un de vos potes. Vous assistez à
+                une réunion indiquant comment détruire l'étoile de la mort. Il va falloir combattre sinon l'étoile noire
+                vous détruira.</p>
+            <div class="buttons">
+                <button go="fuckTheRebellion">ni... la rébellion je rentre sur tatooine</button>
+                <button go="ofCourse">bien sûr que j'y vais. j'ai pas fais tout ce chemin...</button>
+            </div>
+        </div>
+    </div>
+    <action name="changeBackground"/>
 </div>
 
 <div class="section" id="fuckTheRebellion">
-
-    Bon bah voilà. Vous êtes revenus chez vous. Seul. BRAVO. En fait non vous avez perdu.
-
-    <button go="intro">Recommencer</button>
+    <div class="wrapper">
+        <div class="alliance">
+            <p>Bon bah voilà. Vous êtes revenus chez vous. Seul. BRAVO. En fait non vous avez perdu.</p>
+            <div class="buttons">
+                <button go="intro">recommencer</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="ofCourse">
-
-    Vous arrivez à lancer votre torpille à proton au centre de l'étoile noire.
-    BOUM, l'étoile explose. Vous avez gagné !
-
-    <button go="end">YOUPI !</button>
+    <div class="wrapper">
+        <div class="alliance">
+            <p>Vous arrivez à lancer votre torpille à proton au centre de l'étoile noire.
+                BOUM, l'étoile explose. Vous avez gagné !</p>
+            <div class="buttons">
+                <button go="end">youpi !</button>
+            </div>
+        </div>
+    </div>
+    <action name="changeBackground"/>
 </div>
 
 <div class="section" id="end">
-
-    FIN. En attendant que l'empire contre-attaque.
-
-    <button go="intro">Revenir à l'écran de jeu</button>
+    <div class="wrapper">
+        <div class="alliance">
+            <p>FIN. En attendant que l'empire contre-attaque.</p>
+            <div class="buttons">
+                <button go="intro">revenir à l'écran de jeu</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="section" id="death">
-    Vous êtes mort ! La galaxie est dans la merde.
-
-    <button go="intro">Recommencer</button>
+    <div class="wrapper">
+        <div class="intro">
+            <p>Vous êtes mort ! La galaxie est dans la merde.</p>
+            <div class="buttons">
+                <button go="intro">recommencer</button>
+            </div>
+        </div>
+    </div>
+    <action name="setDeathBackground" />
 </div>
 
 </body>

@@ -8,7 +8,7 @@ $(function () {
         this.setPV = function (v) {
             this.pv = v;
         };
-        this.getDamage = function() {
+        this.getDamage = function () {
             return this.damage;
         };
     }
@@ -23,11 +23,11 @@ $(function () {
         this.setPV = function (v) {
             this.pv = v;
         };
-        this.getDamage = function() {
+        this.getDamage = function () {
             return this.damage;
         };
         this.getClass = function () {
-          return this.class;
+            return this.class;
         };
     }
 
@@ -43,7 +43,7 @@ $(function () {
         this.setPV = function (v) {
             this.pv = v;
         };
-        this.getDamage = function() {
+        this.getDamage = function () {
             return this.damage;
         };
         this.getClass = function () {
@@ -65,16 +65,16 @@ $(function () {
         this.getLife = function () {
             return player.life;
         };
-        this.setLife = function(v) {
+        this.setLife = function (v) {
             player.life = v;
         };
-        this.getPV = function() {
+        this.getPV = function () {
             return player.pv;
         };
-        this.setPV = function(v) {
+        this.setPV = function (v) {
             player.pv = v;
         };
-        this.getDamage = function() {
+        this.getDamage = function () {
             return player.damage;
         };
 
@@ -103,19 +103,36 @@ $(function () {
         };
     }
 
+    var backgrounds = [
+        "url('img/intro-wallpaper.jpg')",
+        "url('img/tatooine.jpg')",
+        "url('img/mos-eisley.png')",
+        "url('img/bar.png')",
+        "url('img/han-solo.png')",
+        "url('img/etoile-noire.png')",
+        "url('img/crevard.png')",
+        "url('img/duel.png')",
+        "url('img/alliance.png')",
+        "url('img/explosion.png')",
+        "url('img/final.png')"
+    ];
+
     var player = new Player();
     var inventory = new Inventory();
     var evazan = new Enemy();
     var hommeDesSables = [new HommeDesSables('life-sm-1'), new HommeDesSables('life-sm-2'), new HommeDesSables('life-sm-3')];
-    var stormTroopers = [new Stormtrooper('img-st-1','st-1'), new Stormtrooper('img-st-2','st-2'),new Stormtrooper('img-st-3','st-3'),new Stormtrooper('img-st-4','st-4'),new Stormtrooper('img-st-5','st-5')]
+    var stormTroopers = [new Stormtrooper('img-st-1', 'st-1'), new Stormtrooper('img-st-2', 'st-2'), new Stormtrooper('img-st-3', 'st-3'), new Stormtrooper('img-st-4', 'st-4'), new Stormtrooper('img-st-5', 'st-5')]
 
     var buttons = $(".section button");
+    var statusDiv = $(".status");
     var lifeDiv = $(".life");
     var pvDiv = $(".pv");
     var potionDiv = $(".potion");
 
+    var backgroundsDiv = $('.backgrounds');
+
     buttons.click(function () {
-        $(this).parents("div:first").hide();
+        $(this).parents("div.section:first").css('display', 'none');
         goToSection($(this).attr("go"));
     });
 
@@ -131,35 +148,41 @@ $(function () {
         refresh();
     });
 
-    var refresh = function() {
-        lifeDiv.find("span.value").html(player.getLife());
-        pvDiv.find("span.value").html(player.getPV());
-        $(".enemy-life").html(evazan.getPV() + " PDV");
+    var refresh = function () {
+        var lifes = "";
+        for (var nbLife = 0; nbLife < player.getLife(); nbLife++) {
+            lifes = lifes + '<img src="img/luke.png" />';
+        }
+        lifeDiv.find('.value').html(lifes);
 
-        for(var i = 0; i < hommeDesSables.length; i++ ) {
-          var classe = "." + hommeDesSables[i].getClass();
-          $(classe).html(hommeDesSables[i].getPV() + " PDV");
+        pvDiv.find('.value').html(player.getPV());
+
+        $(".enemy-life").html("pv : " + evazan.getPV());
+
+        for (var i = 0; i < hommeDesSables.length; i++) {
+            var classe = "." + hommeDesSables[i].getClass();
+            $(classe).html("pv : " + hommeDesSables[i].getPV());
         }
 
-        for(var x = 0; x < stormTroopers.length; x++ ) {
+        for (var x = 0; x < stormTroopers.length; x++) {
             var classes = "." + stormTroopers[x].getScoreClass();
-            $(classes).html(stormTroopers[x].getPV() + " PDV");
+            $(classes).html("pv : " + stormTroopers[x].getPV());
         }
 
         var cptDead = 0;
-        for(var y = 0; y < stormTroopers.length; y++ ) {
+        for (var y = 0; y < stormTroopers.length; y++) {
             if (stormTroopers[y].isDead())
-                cptDead ++;
+                cptDead++;
         }
 
-        if(cptDead == 5){
+        if (cptDead == 5) {
             $(".section").hide();
             goToSection('findLeia');
         }
 
         if (inventory.getPotion().nb > 0) {
-            potionDiv.find("span.value").html(inventory.getPotion().nb);
-            potionDiv.show();
+            potionDiv.find('.value').html(inventory.getPotion().nb);
+            potionDiv.css('display', 'inline-block');
         } else {
             potionDiv.hide();
         }
@@ -174,12 +197,30 @@ $(function () {
             player.setLife(0);
             player.setPV(0);
             inventory.setNbPotion(0);
+            $('body').css("background-image", backgrounds[0]);
+            nextBackground = 1;
+            statusDiv.hide();
             refresh();
         },
         start: function startGame() {
             player.setLife(3);
             player.setPV(100);
+            statusDiv.show();
             refresh();
+        },
+        changeBackground: function changeBackground() {
+            $('body').css("background-image", backgrounds[nextBackground]);
+            nextBackground++;
+        },
+        setDeathBackground: function setDeathBackground() {
+            $('body').css("background-image", backgrounds[0]);
+            nextBackground = 1;
+        },
+        changeStatusColorToBlack: function changeStatusColorToBlack() {
+            $('.status').css("color", "black");
+        },
+        changeStatusColorToWhite: function changeStatusColorToWhite() {
+            $('.status').css("color", "white");
         },
         hit: function loseOneLife() {
             var nb_lifes = player.getLife();
@@ -193,9 +234,9 @@ $(function () {
             inventory.increaseNbPotion();
             refresh();
         },
-        fight : function () {
+        fight: function () {
             //perte des pdv du evazan
-            if(evazan.getPV() - player.getDamage() <= 0) {
+            if (evazan.getPV() - player.getDamage() <= 0) {
                 endFightBar();
             } else {
                 evazan.setPV(evazan.getPV() - player.getDamage());
@@ -203,8 +244,8 @@ $(function () {
             }
 
             //perte des pdv du joueurs
-            if(player.getPV() - evazan.getDamage() <= 0) {
-                if(player.getLife() - 1 == 0) {
+            if (player.getPV() - evazan.getDamage() <= 0) {
+                if (player.getLife() - 1 == 0) {
                     endGame();
                 } else {
                     player.resetPv();
@@ -217,48 +258,48 @@ $(function () {
             }
         },
         hitSandMan: function () {
-          //number between 0 and 2
-          var rand = Math.floor(Math.random()*(2-0+1));
+            //number between 0 and 2
+            var rand = Math.floor(Math.random() * (2 - 0 + 1));
 
-          var target = hommeDesSables[rand];
-          //degats sur les enemis
-          if(target.getPV() - target.getDamage() <= 0) {
+            var target = hommeDesSables[rand];
+            //degats sur les enemis
+            if (target.getPV() - target.getDamage() <= 0) {
 
-          } else {
-              target.setPV(target.getPV() - target.getDamage());
-              refresh();
-          }
+            } else {
+                target.setPV(target.getPV() - target.getDamage());
+                refresh();
+            }
 
-          //perte des pdv du joueurs
-          if(player.getPV() - target.getDamage() <= 0) {
-              if(player.getLife() - 1 == 0) {
-                  endGame();
-              } else {
-                  player.resetPv();
-                  player.setLife(player.getLife() - 1);
-                  refresh();
-                  $('.section').hide();
-                  goToSection('takeALook');
-              }
-          } else {
-              player.setPV(player.getPV() - target.getDamage());
-              refresh();
-          }
+            //perte des pdv du joueurs
+            if (player.getPV() - target.getDamage() <= 0) {
+                if (player.getLife() - 1 == 0) {
+                    endGame();
+                } else {
+                    player.resetPv();
+                    player.setLife(player.getLife() - 1);
+                    refresh();
+                    $('.section').hide();
+                    goToSection('takeALook');
+                }
+            } else {
+                player.setPV(player.getPV() - target.getDamage());
+                refresh();
+            }
         },
 
-        combat : function () {
+        combat: function () {
             //number between 0 and 4
-            var rand = Math.floor(Math.random()*(4-0+1));
+            var rand = Math.floor(Math.random() * (4 - 0 + 1));
 
-            while (stormTroopers[rand].getPV() == 0 ){
-                rand = Math.floor(Math.random()*(4-0+1));
+            while (stormTroopers[rand].getPV() == 0) {
+                rand = Math.floor(Math.random() * (4 - 0 + 1));
             }
 
             var target = stormTroopers[rand];
 
-            for(var i = 0; i < stormTroopers.length; i ++) {
-                if(player.getPV() - stormTroopers[i].getDamage() <= 0) {
-                    if(player.getLife()  == 0) {
+            for (var i = 0; i < stormTroopers.length; i++) {
+                if (player.getPV() - stormTroopers[i].getDamage() <= 0) {
+                    if (player.getLife() == 0) {
                         endGame();
                     } else {
                         player.resetPv();
@@ -272,7 +313,7 @@ $(function () {
             }
 
             //degats sur les enemis
-            if(target.getPV() - target.getDamage() <= 0) {
+            if (target.getPV() - target.getDamage() <= 0) {
                 target.setPV(0);
             } else {
                 target.setPV(target.getPV() - player.getDamage());
@@ -291,9 +332,11 @@ $(function () {
     }
 
     function executeAction(section) {
-        var action = section.find("action").attr('name');
-        if (action != undefined) {
-            functions[action]();
+        var actions = section.find("action");
+        if (actions != undefined) {
+            $.each(actions, function(key, value) {
+                functions[$(value).attr('name')]();
+            });
         }
     }
 
@@ -302,16 +345,16 @@ $(function () {
         goToSection('death');
     }
 
-    function endFightBar(){
+    function endFightBar() {
         $('.section').hide();
-        goToSection('makeATour');
+        goToSection('victoryBar');
     }
 
-    function endFightSandMans () {
+    function endFightSandMans() {
 
     }
 
-    function endFightStormtrooper () {
+    function endFightStormtrooper() {
 
     }
 
