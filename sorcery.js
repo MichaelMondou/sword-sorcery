@@ -158,10 +158,12 @@ $(function () {
                 cptDead ++;
         }
 
-        if(cptDead == 5 && alreadyDone == false){
+        if(cptDead == 5 ){
             $(".section").hide();
             goToSection('findLeia');
             alreadyDone = true;
+            console.log('passe ici');
+            functions.resetStormTroopers();
         }
 
         if (inventory.getPotion().nb > 0) {
@@ -188,6 +190,21 @@ $(function () {
             player.setPV(100);
             refresh();
         },
+        resetEvazan : function() {
+          evazan.setPV(250);
+          refresh();
+        },
+        resetSandMans : function () {
+          for(var i = 0; i < hommeDesSables; i ++) {
+              hommeDesSables[i].setPV(500);
+          }
+        },
+        resetStormTroopers : function() {
+            for(var i = 0; i < stormTroopers.length; i ++) {
+                stormTroopers[i].setPV(100);
+            }
+            console.log(stormTroopers);
+        },
         hit: function loseOneLife() {
             var nb_lifes = player.getLife();
             if (nb_lifes - 1 == 0) {
@@ -204,6 +221,7 @@ $(function () {
             //perte des pdv du evazan
             if(evazan.getPV() - player.getDamage() <= 0) {
                 endFightBar();
+                functions.resetEvazan();
             } else {
                 evazan.setPV(evazan.getPV() - player.getDamage());
                 refresh();
@@ -211,8 +229,14 @@ $(function () {
 
             //perte des pdv du joueurs
             if(player.getPV() - evazan.getDamage() <= 0) {
-                if(player.getLife() - 1 == 0) {
+                if(player.getLife() == 0) {
                     endGame();
+                    player.setLife(3);
+                    player.setPV(100);
+                    inventory.setNbPotion(0);
+                    console.log(player);
+                    refresh();
+                    console.log(player);
                 } else {
                     player.resetPv();
                     player.setLife(player.getLife() - 1);
@@ -238,8 +262,9 @@ $(function () {
 
           //perte des pdv du joueurs
           if(player.getPV() - target.getDamage() <= 0) {
-              if(player.getLife() - 1 == 0) {
+              if(player.getLife()  == 0) {
                   endGame();
+                  functions.resetSandMans();
               } else {
                   player.resetPv();
                   player.setLife(player.getLife() - 1);
@@ -267,6 +292,11 @@ $(function () {
                 if(player.getPV() - stormTroopers[i].getDamage() <= 0) {
                     if(player.getLife()  == 0) {
                         endGame();
+                        player.setLife(3);
+                        player.setPV(100);
+                        inventory.setNbPotion(1);
+                        functions.resetStormTroopers();
+                        refresh();
                     } else {
                         player.resetPv();
                         player.setLife(player.getLife() - 1);
@@ -301,23 +331,48 @@ $(function () {
         }
 
         if(key == 'intro') {
+
+            functions.reset();
+
             if(etoileNoireChecked) {
                 var sectionEtoileNoire = $("#" + 'leaveMosEisley');
                 sectionEtoileNoire.show();
                 executeAction(sectionEtoileNoire);
+
+                player.setLife(3);
+                player.setPV(100);
+                inventory.setNbPotion(1);
+                refresh();
+
             } else if(eisleyChecked) {
                 var sectionMosEisley = $("#" + 'takeYourCojones');
                 sectionMosEisley.show();
                 executeAction(sectionMosEisley);
+
+                player.setLife(3);
+                player.setPV(100);
+                inventory.setNbPotion(0);
+                refresh();
+
             }else if(tatooineChecked) {
                 var sectionTatooin = $("#" + 'begin');
                 sectionTatooin.show();
                 executeAction(sectionTatooin);
-            }else {
+
+                player.setLife(3);
+                player.setPV(100);
+                inventory.setNbPotion(0);
+                refresh();
+
+            } else {
                 var sectionDefault = $("#" + key);
                 sectionDefault.show();
                 executeAction(sectionDefault);
             }
+        } else if(key == 'intro2') {
+            var intro = $('#intro');
+            intro.show();
+            executeAction(intro);
         } else {
             var section = $("#" + key);
             section.show();
