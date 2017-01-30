@@ -113,6 +113,11 @@ button {
     border-radius: 3px;
 }
 
+.intro p {
+    background-color: yellow;
+    color: black;
+}
+
 .intro button {
     height: auto;
     display: block;
@@ -212,10 +217,20 @@ button {
 }
 
 @media (min-width: 1024px) {
+    .tatooine button:hover {
+        background-color: rgba(186, 181, 149, 0.7);
+    }
+
     .intro button:hover {
         border-color: yellow;
         background-color: transparent;
         color: yellow;
+    }
+
+    .mos-eisley button:hover,
+    .cantina button:hover,
+    .death-star button:hover {
+        background-color: rgba(200, 200, 200, 0.7);
     }
 
     .wrapper {

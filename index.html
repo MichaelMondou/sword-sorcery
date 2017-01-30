@@ -259,7 +259,7 @@
             </div>
         </div>
     </div>
-    <action name="hitSandMan"/>
+    <action name="tuskensCombat"/>
 </div>
 
 <div class="section" id="waitTheMorning">
@@ -447,7 +447,7 @@
             <p>Votre adversaire vous cogne.</p>
             <ul class="images">
                 <li>
-                    <span class="image enemy-life"></span>
+                    <span class="image evazan-life"></span>
                     <img src='img/evazan.png' alt="Evazan">
                 </li>
             </ul>
@@ -457,7 +457,7 @@
             </div>
         </div>
     </div>
-    <action name="fight"/>
+    <action name="evazanCombat"/>
 </div>
 
 <div class="section" id="victoryBar">*
@@ -497,6 +497,7 @@
         </div>
     </div>
     <action name="changeBackground"/>
+    <action name="changeStatusColorToWhite"/>
 </div>
 
 <div class="section" id="leaveMosEisley">
@@ -515,7 +516,6 @@
         </div>
     </div>
     <action name="changeBackground"/>
-    <action name="changeStatusColorToWhite"/>
 </div>
 
 <div class="section" id="makeFront">
@@ -556,7 +556,7 @@
 <div class="section" id="hitThem">
     <div class="wrapper">
         <div class="death-star">
-            <p>Vous avez un nouvel équipement qui permet d'accèder au diagramme de l'étoile noire.
+            <p>Vous avez un nouvel équipement qui permet d'accèder au diagramme de l'étoile noire. Vous gagnez aussi une potion.<br />
                 R2D2 décode l'emplacement du rayon magnétique qui vous empêche de redécoller.
                 Ben décide d'y aller seul. R2D2 trouve où est enfermée la princesse Leia.</p>
             <div class="buttons">
@@ -565,6 +565,7 @@
             </div>
         </div>
     </div>
+    <action name="potionWin" />
 </div>
 
 <div class="section" id="goAlone">
@@ -645,7 +646,7 @@
             </div>
         </div>
     </div>
-    <action name="combat"/>
+    <action name="stormtroopersCombat"/>
 </div>
 
 <div class="section" id="findLeia">
@@ -731,7 +732,7 @@
         <div class="alliance">
             <p>FIN. En attendant que l'empire contre-attaque.</p>
             <div class="buttons">
-                <button go="intro2">revenir à l'écran de jeu</button>
+                <button go="backToIntro">revenir à l'écran de jeu</button>
             </div>
         </div>
     </div>
