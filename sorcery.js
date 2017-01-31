@@ -1,105 +1,4 @@
 $(function () {
-    // Classes
-    function Enemy() {
-        this.pv = 250;
-        this.damage = 10;
-        this.getPV = function () {
-            return this.pv;
-        };
-        this.setPV = function (v) {
-            this.pv = v;
-        };
-        this.getDamage = function () {
-            return this.damage;
-        };
-    }
-    function Tusken(cls) {
-        this.pv = 500;
-        this.class = cls;
-        this.damage = 40;
-        this.getPV = function () {
-            return this.pv;
-        };
-        this.setPV = function (v) {
-            this.pv = v;
-        };
-        this.getDamage = function () {
-            return this.damage;
-        };
-        this.getClass = function () {
-            return this.class;
-        };
-    }
-    function Stormtrooper(img, scoreCls) {
-        this.pv = 100;
-        this.imgclass = img;
-        this.scoreclass = scoreCls;
-        this.damage = 9;
-
-        this.getPV = function () {
-            return this.pv;
-        };
-        this.setPV = function (v) {
-            this.pv = v;
-        };
-        this.getDamage = function () {
-            return this.damage;
-        };
-        this.getClass = function () {
-            return this.imgclass;
-        };
-        this.getScoreClass = function () {
-            return this.scoreclass;
-        };
-        this.isDead = function () {
-            return this.pv == 0;
-        }
-    }
-    function Player() {
-        this.life = 3;
-        this.pv = 100;
-        this.damage = 50;
-
-        this.getLife = function () {
-            return player.life;
-        };
-        this.setLife = function (v) {
-            player.life = v;
-        };
-        this.getPV = function () {
-            return player.pv;
-        };
-        this.setPV = function (v) {
-            player.pv = v;
-        };
-        this.getDamage = function () {
-            return player.damage;
-        };
-
-        this.resetPv = function () {
-            this.pv = 100;
-        }
-    }
-    function Inventory() {
-        this.potion = {
-            "nb": 0,
-            "value": 50
-        };
-
-        this.getPotion = function getPotion() {
-            return this.potion;
-        };
-        this.setNbPotion = function setNbPotion(v) {
-            this.potion.nb = v;
-        };
-        this.increaseNbPotion = function increaseNbPotion() {
-            this.potion.nb++;
-        };
-        this.decreaseNbPotion = function decreaseNbPotion() {
-            this.potion.nb--;
-        };
-    }
-
     // Define backgrounds
     var backgrounds = [
         "url('img/intro-wallpaper.jpg')",
@@ -114,6 +13,7 @@ $(function () {
         "url('img/explosion.png')",
         "url('img/final.png')"
     ];
+
     var backgroundsDiv = $('.backgrounds');
 
     var player = new Player();
@@ -132,15 +32,15 @@ $(function () {
         new Stormtrooper('img-st-5', 'st-5')
     ];
 
-    var buttons = $(".section button");
+    var buttons   = $(".section button");
     var statusDiv = $(".status");
-    var lifeDiv = $(".life");
-    var pvDiv = $(".pv");
+    var lifeDiv   = $(".life");
+    var pvDiv     = $(".pv");
     var potionDiv = $(".potion");
 
     // Define checkpoints
-    var tatooineChecked = false;
-    var eisleyChecked = false;
+    var tatooineChecked  = false;
+    var eisleyChecked    = false;
     var deathStarChecked = false;
 
     // Init buttons behavior
@@ -206,11 +106,11 @@ $(function () {
 
     // Library of functions enable to access in html
     var functions = {
-        init: function initGame() {
+        init: function () {
             $(".section").hide();
             goToSection('intro');
         },
-        reset: function resetGame() {
+        reset: function () {
             player.setLife(0);
             player.setPV(0);
             inventory.setNbPotion(0);
@@ -219,13 +119,13 @@ $(function () {
             statusDiv.hide();
             refresh();
         },
-        start: function startGame() {
+        start: function () {
             player.setLife(3);
             player.setPV(100);
             statusDiv.show();
             refresh();
         },
-        resetEvazan : function() {
+        resetEvazan : function () {
           evazan.setPV(250);
           refresh();
         },
@@ -234,26 +134,26 @@ $(function () {
               tuskens[i].setPV(500);
           }
         },
-        resetStormtroopers : function() {
+        resetStormtroopers : function () {
             for (var i = 0 ; i < stormtroopers.length ; i++) {
                 stormtroopers[i].setPV(100);
             }
         },
-        changeBackground: function changeBackground() {
+        changeBackground: function () {
             $('body').css("background-image", backgrounds[nextBackground]);
             nextBackground++;
         },
-        setDeathBackground: function setDeathBackground() {
+        setDeathBackground: function () {
             $('body').css("background-image", backgrounds[0]);
             nextBackground = 1;
         },
-        changeStatusColorToBlack: function changeStatusColorToBlack() {
+        changeStatusColorToBlack: function () {
             $('.status').css("color", "black");
         },
-        changeStatusColorToWhite: function changeStatusColorToWhite() {
+        changeStatusColorToWhite: function () {
             $('.status').css("color", "white");
         },
-        hit: function hit() {
+        hit: function () {
             var nb_lifes = player.getLife();
             if (nb_lifes - 1 == 0) {
                 endGame();
@@ -261,7 +161,7 @@ $(function () {
             player.setLife(nb_lifes - 1);
             refresh();
         },
-        potionWin: function potionWin() {
+        potionWin: function () {
             inventory.increaseNbPotion();
             refresh();
         },
@@ -361,75 +261,83 @@ $(function () {
             }
         }
     };
+
     function goToSection(key) {
-        // Enable checkpoints
-        if(key == 'begin') {
-            tatooineChecked = true;
-        } else if(key == 'takeYourCojones') {
-            eisleyChecked = true;
-        } else if(key == 'leaveMosEisley') {
-            deathStarChecked = true;
-        }
-
-        if(key == 'intro') {
-            functions.reset();
-            if(deathStarChecked) {
-                var deathStarSection = $("#" + 'leaveMosEisley');
-                deathStarSection.show();
-                executeAction(deathStarSection);
-
-                player.setLife(3);
-                player.setPV(100);
-                statusDiv.show();
-                refresh();
-
-                nextBackground = 5;
-                functions.changeBackground();
-
-            } else if(eisleyChecked) {
-
-                var mosEisleySection = $("#" + 'takeYourCojones');
-                mosEisleySection.show();
-                executeAction(mosEisleySection);
-
-                player.setLife(3);
-                player.setPV(100);
-                inventory.setNbPotion(0);
-                statusDiv.show();
-                refresh();
-
-                nextBackground = 2;
-                functions.changeBackground();
-
-            }else if(tatooineChecked) {
-                var tatooineSection = $("#" + 'begin');
-                tatooineSection.show();
-                executeAction(tatooineSection);
-
-                player.setLife(3);
-                player.setPV(100);
-                inventory.setNbPotion(0);
-                statusDiv.show();
-                refresh();
-
-                nextBackground = 1;
-                functions.changeBackground();
-
-            } else {
-                var defaultSection = $("#" + key);
-                defaultSection.show();
-                executeAction(defaultSection);
-            }
-        } else if(key == 'backToIntro') {
-            var intro = $('#intro');
-            intro.show();
-            executeAction(intro);
-        } else {
-            var section = $("#" + key);
-            section.show();
-            executeAction(section);
-        }
+        refreshCheckpoints(key);
+        checkpoints(key);
     }
+
+    function refreshCheckpoints(key) {
+      if(key == 'begin') {
+          tatooineChecked = true;
+      } else if(key == 'takeYourCojones') {
+          eisleyChecked = true;
+      } else if(key == 'leaveMosEisley') {
+          deathStarChecked = true;
+      }
+    }
+
+    function checkpoints (key) {
+      if(key == 'intro') {
+          functions.reset();
+          if(deathStarChecked) {
+              var deathStarSection = $("#" + 'leaveMosEisley');
+              deathStarSection.show();
+              executeAction(deathStarSection);
+
+              player.setLife(3);
+              player.setPV(100);
+              statusDiv.show();
+              refresh();
+
+              nextBackground = 5;
+              functions.changeBackground();
+
+          } else if(eisleyChecked) {
+
+              var mosEisleySection = $("#" + 'takeYourCojones');
+              mosEisleySection.show();
+              executeAction(mosEisleySection);
+
+              player.setLife(3);
+              player.setPV(100);
+              inventory.setNbPotion(0);
+              statusDiv.show();
+              refresh();
+
+              nextBackground = 2;
+              functions.changeBackground();
+
+          }else if(tatooineChecked) {
+              var tatooineSection = $("#" + 'begin');
+              tatooineSection.show();
+              executeAction(tatooineSection);
+
+              player.setLife(3);
+              player.setPV(100);
+              inventory.setNbPotion(0);
+              statusDiv.show();
+              refresh();
+
+              nextBackground = 1;
+              functions.changeBackground();
+
+          } else {
+              var defaultSection = $("#" + key);
+              defaultSection.show();
+              executeAction(defaultSection);
+          }
+      } else if(key == 'backToIntro') {
+          var intro = $('#intro');
+          intro.show();
+          executeAction(intro);
+      } else {
+          var section = $("#" + key);
+          section.show();
+          executeAction(section);
+      }
+    }
+
     function executeAction(section) {
         var actions = section.find("action");
         if (actions != undefined) {
@@ -438,15 +346,16 @@ $(function () {
             });
         }
     }
+
     function endGame() {
         $('.section').hide();
         goToSection('death');
     }
+
     function endFightBar() {
         $('.section').hide();
         goToSection('victoryBar');
     }
 
     functions['init']();
-
 });
