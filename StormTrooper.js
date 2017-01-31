@@ -2,7 +2,7 @@ function Stormtrooper(img, scoreCls) {
     this.pv = 100;
     this.imgclass = img;
     this.scoreclass = scoreCls;
-    this.damage = 9;
+    this.damage = 8;
 
     this.getPV = function () {
         return this.pv;

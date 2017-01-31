@@ -145,6 +145,7 @@ $(function () {
         },
         setDeathBackground: function () {
             $('body').css("background-image", backgrounds[0]);
+            statusDiv.hide();
             nextBackground = 1;
         },
         changeStatusColorToBlack: function () {

@@ -96,6 +96,10 @@ p {
     background-color: rgba(224, 205, 169, 0.7);
 }
 
+#death {
+    margin-top: 100px;
+}
+
 .buttons {
     margin: 30px 30px;
 }
